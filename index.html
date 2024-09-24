@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Done</title>
+</head>
+<body>
+    <p>Done. Returning two pages back...</p>
+
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                if (window.history.length > 2) { // Ensure there are at least 2 pages in history
+                    window.history.go(-2); // Go back two screens
+                } else {
+                    window.close(); // Close if there's no enough history
+                }
+            }, 1000); // Wait for 1 second before going back
+        };
+    </script>
+</body>
+</html>
