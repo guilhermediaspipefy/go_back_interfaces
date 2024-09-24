@@ -6,27 +6,17 @@
     <title>Done</title>
 </head>
 <body>
-    <p>Done. Returning to the second last page...</p>
+    <p>Done. Returning two pages back...</p>
 
     <script>
         window.onload = function() {
             setTimeout(function() {
-                // Check if there is a window that opened this one
-                if (window.opener) {
-                    // Access the opener window's history
-                    let previousUrl = window.opener.document.referrer;
-                    
-                    // Try going back two pages in the opener's history
-                    if (previousUrl) {
-                        window.opener.location.href = previousUrl; // Redirect to the previous URL
-                    } else {
-                        // Fallback if there is no referrer
-                        alert("No previous page found in the opener.");
-                        window.close(); // Close if not enough history
-                    }
+                // Ensure there are at least 2 pages in history
+                if (window.history.length > 2) { 
+                    window.history.go(-2); // Go back two pages
                 } else {
-                    alert("This page was not opened from another window.");
-                    window.close(); // Close if there is no opener
+                    alert("Not enough history to go back two pages.");
+                    window.close(); // Close if not enough history
                 }
             }, 1000); // Wait for 1 second before going back
         };
