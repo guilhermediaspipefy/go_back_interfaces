@@ -6,17 +6,29 @@
     <title>Done</title>
 </head>
 <body>
-    <p>Done. Returning two pages back...</p>
+    <p>Done. Returning to the second last page...</p>
 
     <script>
+        // Store the current page in session storage
+        if (window.sessionStorage) {
+            let currentPage = window.location.href;
+            let previousPages = JSON.parse(sessionStorage.getItem('previousPages')) || [];
+            
+            // Add the current page to the storage
+            previousPages.push(currentPage);
+            sessionStorage.setItem('previousPages', JSON.stringify(previousPages));
+        }
+
         window.onload = function() {
             setTimeout(function() {
-                // Ensure there are at least 2 pages in history
-                if (window.history.length > 2) { 
-                    window.history.go(-2); // Go back two pages
+                // Retrieve the stored previous pages
+                let previousPages = JSON.parse(sessionStorage.getItem('previousPages')) || [];
+
+                if (previousPages.length > 2) {
+                    // Redirect to the second last page
+                    window.location.href = previousPages[previousPages.length - 3]; // Go to the second last page
                 } else {
-                    alert("Not enough history to go back two pages.");
-                    window.close(); // Close if not enough history
+                    window.close(); // Close if there are not enough pages
                 }
             }, 1000); // Wait for 1 second before going back
         };
