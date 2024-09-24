@@ -11,10 +11,12 @@
     <script>
         window.onload = function() {
             setTimeout(function() {
-                if (window.history.length > 2) { // Ensure there are at least 2 pages in history
-                    window.history.go(-2); // Go back two screens
+                // Ensure there are at least 2 pages in history
+                if (window.history.length > 2) { 
+                    window.history.go(-2); // Go back two pages
                 } else {
-                    window.close(); // Close if there's no enough history
+                    alert("Not enough history to go back two pages.");
+                    window.close(); // Close if not enough history
                 }
             }, 1000); // Wait for 1 second before going back
         };
